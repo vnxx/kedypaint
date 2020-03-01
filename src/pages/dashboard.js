@@ -1,6 +1,7 @@
 import React from 'react'
 // import Icons from "../components/icons"
 // import { Link } from "gatsby"
+import EditRoom from '../components/dashboard/update'
 import NewRoom from '../components/dashboard/new'
 import Home from '../components/dashboard/home'
 
@@ -9,6 +10,11 @@ const INITIAL = [
         id: 1,
         name: 'sample',
         paintneeds: 8.8,
+        options: {
+            layers: 2,
+            wall_num: 4,
+            plafon: true
+        },
         sizes: {
             width: 3,
             length: 3.5,
@@ -18,16 +24,22 @@ const INITIAL = [
 ]
 
 export default function Dashboard() {
-    const [data, setData] = React.useState(INITIAL);
+    const [data, setData] = React.useState(JSON.parse(localStorage.getItem('myrooms')) || INITIAL);
     const [selectedBar, setSelectedBar] = React.useState('');
+    const [dataEdit, setDataEdit] = React.useState({});
 
-    function updateData(new_d) {
+    function setNewData(new_d) {
         let all_d = [
             ...data,
             {
                 id: data.length + 1,
                 name: new_d.name,
                 paintneeds: new_d.paintneeds,
+                options: {
+                    layers: 2,
+                    wall_num: 4,
+                    plafon: true
+                },
                 sizes: {
                     width: new_d.width,
                     length: new_d.length,
@@ -49,17 +61,61 @@ export default function Dashboard() {
         setData(all_d)
     }
 
-    function SwitchBar() {
-        if (selectedBar === 'new') {
-            return <NewRoom setBar={setSelectedBar} setData={updateData} />
-        } else {
-            return <Home data={data} setBar={setSelectedBar} />
-        }
+    function editData(id, edited) {
+        setData(data.map(item => item.id === id ? {
+            ...item,
+            name: edited.name,
+            paintneeds: edited.paintneeds,
+            options: {
+                layers: 2,
+                wall_num: 4,
+                plafon: true
+            },
+            sizes: {
+                width: edited.width,
+                length: edited.length,
+                height: edited.height,
+            }
+        } : item))
     }
+
+    React.useEffect(() => {
+        if (Object.keys(dataEdit).length !== 0) {
+            setSelectedBar('edit')
+        }
+    }, [dataEdit])
+
+    React.useEffect(() => {
+        if (selectedBar === 'home') {
+            setDataEdit({})
+        }
+    }, [selectedBar])
+
+    React.useEffect(() => {
+        localStorage.setItem('myrooms', JSON.stringify(data))
+    }, [data])
 
     return (
         <React.Fragment>
-            <SwitchBar />
+            <SwitchBar
+                setSelectedBar={setSelectedBar}
+                selectedBar={selectedBar}
+                editData={editData}
+                setNewData={setNewData}
+                dataEdit={dataEdit}
+                data={data}
+                setDataEdit={setDataEdit}
+            />
         </React.Fragment>
     )
+}
+
+function SwitchBar({ setSelectedBar, selectedBar, editData, setNewData, dataEdit, data, setDataEdit }) {
+    if (selectedBar === 'new') {
+        return <NewRoom setBar={setSelectedBar} setData={setNewData} />
+    } else if (selectedBar === 'edit') {
+        return <EditRoom setBar={setSelectedBar} data={dataEdit} edit={editData} />
+    } else {
+        return <Home setDataEdit={setDataEdit} data={data} setBar={setSelectedBar} />
+    }
 }

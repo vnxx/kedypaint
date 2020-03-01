@@ -4,13 +4,6 @@ import { useSpring, animated, config } from 'react-spring'
 import { InputText } from '../input'
 import { paint_calculate } from '../helper'
 
-const init = {
-    name: 'kevin',
-    width: 3,
-    length: 3.5,
-    height: 4,
-}
-
 function validate(val) {
     let errors = {}
     if (val.name === "") {
@@ -29,8 +22,13 @@ function validate(val) {
     return errors
 }
 
-export default function NewRoom({ setData, setBar }) {
-    const [typeData, setTypeData] = React.useState(init)
+export default function EditRoom({ edit, setBar, data }) {
+    const [typeData, setTypeData] = React.useState({
+        name: data.name,
+        width: data.sizes.width,
+        height: data.sizes.height,
+        length: data.sizes.length,
+    })
     const [errors, setErrors] = React.useState({});
     const [submited, setSubmited] = React.useState(false);
 
@@ -54,7 +52,7 @@ export default function NewRoom({ setData, setBar }) {
     React.useEffect(() => {
         if (submited) {
             if (Object.keys(errors).length === 0) {
-                setData(paint_calculate(typeData))
+                edit(data.id, paint_calculate(typeData))
                 setBar('home')
             } else {
                 setSubmited(false)
