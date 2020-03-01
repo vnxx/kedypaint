@@ -4,6 +4,7 @@ module.exports = {
       colors: {
         'primary': '#2A82F0',
         'secondary': '#183560',
+        'danger': '#E83A3A',
       },
       width: {
         'container': '565px'

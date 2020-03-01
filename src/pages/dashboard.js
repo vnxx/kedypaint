@@ -79,6 +79,14 @@ export default function Dashboard() {
         } : item))
     }
 
+    function deleteData(id) {
+        let old = [...data]
+        const index = old.findIndex(x => x.id === id)
+        old.splice(index, 1)
+        setData(old)
+        setSelectedBar('home')
+    }
+
     React.useEffect(() => {
         if (Object.keys(dataEdit).length !== 0) {
             setSelectedBar('edit')
@@ -105,16 +113,17 @@ export default function Dashboard() {
                 dataEdit={dataEdit}
                 data={data}
                 setDataEdit={setDataEdit}
+                deleteData={deleteData}
             />
         </React.Fragment>
     )
 }
 
-function SwitchBar({ setSelectedBar, selectedBar, editData, setNewData, dataEdit, data, setDataEdit }) {
+function SwitchBar({ setSelectedBar, selectedBar, editData, setNewData, deleteData, dataEdit, data, setDataEdit }) {
     if (selectedBar === 'new') {
         return <NewRoom setBar={setSelectedBar} setData={setNewData} />
     } else if (selectedBar === 'edit') {
-        return <EditRoom setBar={setSelectedBar} data={dataEdit} edit={editData} />
+        return <EditRoom deleteData={deleteData} setBar={setSelectedBar} data={dataEdit} edit={editData} />
     } else {
         return <Home setDataEdit={setDataEdit} data={data} setBar={setSelectedBar} />
     }
