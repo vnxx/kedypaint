@@ -1,32 +1,15 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
+import Icons from './icons'
 
-const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
+const Header = ({ siteTitle, action }) => (
+  <header className="flex items-center justify-center block relative py-4 text-white z-20">
+    <div className="w-11/12 mt-1 sm:w-container flex items-center">
+      <span onClick={() => action()}>
+        <Icons name="back" className="fill-current mr-3 cursor-pointer" />
+      </span>
+      <h1>{siteTitle || null}</h1>
     </div>
   </header>
 )
