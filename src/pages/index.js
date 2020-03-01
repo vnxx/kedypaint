@@ -7,6 +7,7 @@ import '../components/layout.css'
 
 const IndexPage = () => (
   <React.Fragment>
+    <SEO />
     <div className="min-h-screen flex justify-center items-center">
       <div className="w-11/12 sm:w-container text-center text-white">
         <div className="w-full m-auto sm:w-3/5 mb-3">

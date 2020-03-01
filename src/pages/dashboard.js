@@ -1,6 +1,7 @@
 import React from 'react'
 // import Icons from "../components/icons"
 // import { Link } from "gatsby"
+import SEO from "../components/seo"
 import EditRoom from '../components/dashboard/update'
 import NewRoom from '../components/dashboard/new'
 import Home from '../components/dashboard/home'
@@ -24,7 +25,7 @@ const INITIAL = [
 ]
 
 export default function Dashboard() {
-    const [data, setData] = React.useState(JSON.parse(localStorage.getItem('myrooms')) || INITIAL);
+    const [data, setData] = React.useState(undefined);
     const [selectedBar, setSelectedBar] = React.useState('');
     const [dataEdit, setDataEdit] = React.useState({});
 
@@ -100,11 +101,24 @@ export default function Dashboard() {
     }, [selectedBar])
 
     React.useEffect(() => {
-        localStorage.setItem('myrooms', JSON.stringify(data))
+        if (typeof data !== 'undefined') {
+            localStorage.setItem('myrooms', JSON.stringify(data))
+        }
     }, [data])
+
+    React.useEffect(() => {
+        let myrooms = {}
+        try {
+            myrooms = JSON.parse(localStorage.getItem('myrooms'))
+            setData(myrooms || INITIAL)
+        } catch (error) {
+            setData(INITIAL)
+        }
+    }, [])
 
     return (
         <React.Fragment>
+            <SEO />
             <SwitchBar
                 setSelectedBar={setSelectedBar}
                 selectedBar={selectedBar}
@@ -124,7 +138,9 @@ function SwitchBar({ setSelectedBar, selectedBar, editData, setNewData, deleteDa
         return <NewRoom setBar={setSelectedBar} setData={setNewData} />
     } else if (selectedBar === 'edit') {
         return <EditRoom deleteData={deleteData} setBar={setSelectedBar} data={dataEdit} edit={editData} />
-    } else {
+    } else if (typeof data !== 'undefined') {
         return <Home setDataEdit={setDataEdit} data={data} setBar={setSelectedBar} />
+    } else {
+        return null
     }
 }

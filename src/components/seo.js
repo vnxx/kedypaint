@@ -26,22 +26,38 @@ function SEO({ description, lang, meta, title }) {
   )
 
   const metaDescription = description || site.siteMetadata.description
+  const metaTitle = title || site.siteMetadata.title
 
   return (
     <Helmet
       htmlAttributes={{
         lang,
       }}
-      title={title}
-      titleTemplate={`%s | ${site.siteMetadata.title}`}
+      title={metaTitle}
       meta={[
         {
           name: `description`,
           content: metaDescription,
         },
         {
+          property: `og:image:width`,
+          content: `279`,
+        },
+        {
+          property: `og:image:height`,
+          content: `279`,
+        },
+        {
+          property: `og:url`,
+          content: `https://kedypaint.bykevin.work`,
+        },
+        {
+          property: `og:image`,
+          content: `https://drive.google.com/uc?export=view&id=1Dbd0668Tj-lQcMwbPQWh_jO7VyutQaoh`,
+        },
+        {
           property: `og:title`,
-          content: title,
+          content: metaTitle,
         },
         {
           property: `og:description`,
@@ -61,7 +77,7 @@ function SEO({ description, lang, meta, title }) {
         },
         {
           name: `twitter:title`,
-          content: title,
+          content: metaTitle,
         },
         {
           name: `twitter:description`,
@@ -82,7 +98,7 @@ SEO.propTypes = {
   description: PropTypes.string,
   lang: PropTypes.string,
   meta: PropTypes.arrayOf(PropTypes.object),
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
 }
 
 export default SEO

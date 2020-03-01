@@ -79,9 +79,9 @@ export default function EditRoom({ edit, setBar, data, deleteData }) {
                     <div className="w-11/12 mt-1 sm:w-container m-auto min-h-screen">
                         <animated.div style={body} className="w-5/6 sm:w-1/2 m-auto mt-3 relative bg-white p-5 block box-border rounded-lg text-secondary">
                             <InputText label="Room Name" error={errors.name} placeholder="kamar" name="name" change={handleChange} value={typeData.name} />
-                            <InputText label="Room Length" error={errors.length} name="length" type="number" value={typeData.length} change={handleChange} />
-                            <InputText label="Room Width" error={errors.width} name="width" type="number" value={typeData.width} change={handleChange} />
-                            <InputText label="Room Height" error={errors.height} name="height" type="number" value={typeData.height} change={handleChange} />
+                            <InputText label="Room Length" error={errors.length} placeholder="3.5" name="length" type="number" value={typeData.length} change={handleChange} />
+                            <InputText label="Room Width" error={errors.width} placeholder="3" name="width" type="number" value={typeData.width} change={handleChange} />
+                            <InputText label="Room Height" error={errors.height} placeholder="4" name="height" type="number" value={typeData.height} change={handleChange} />
                             <div className="flex w-full mb-5 justify-center items-center">
                                 <button onClick={() => deleteData(data.id)} className="py-3 w-full outline-none shadow-sec text-sm px-10 rounded-full text-white inline-block font-bold bg-danger">Delete</button>
                             </div>
