@@ -11,7 +11,7 @@ const IndexPage = () => (
     <div className="min-h-screen flex justify-center items-center">
       <div className="w-11/12 sm:w-container text-center text-white">
         <div className="w-full m-auto sm:w-3/5 mb-3">
-          <h1 className="text-white text-4xl sm:text-5xl text-center font-bold">Estimasi Kebutuhan Cat</h1>
+          <h1 className="text-white text-5xl sm:text-5xl text-center font-bold">Estimasi Kebutuhan Cat</h1>
         </div>
         <div className="flex mb-5 justify-center items-center">
           <Link to="/dashboard" className="py-3 shadow-main px-10 rounded-full text-1xl sm:text-2xl text-secondary inline-block font-bold bg-white">Let’s Get Started</Link>

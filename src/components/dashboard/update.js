@@ -76,7 +76,7 @@ export default function EditRoom({ edit, setBar, data, deleteData }) {
         <React.Fragment>
             <animated.div style={animate} className="absolute min-h-screen overflow-x-hidden w-full z-10 bg-primary">
                 <Layout action={() => setBar('home')} isback={true}>
-                    <div className="w-11/12 mt-1 sm:w-container m-auto min-h-screen">
+                    <div className="w-11/12 mt-1 sm:w-container m-auto pt-5 pb-10">
                         <animated.div style={body} className="w-5/6 sm:w-1/2 m-auto mt-3 relative bg-white p-5 block box-border rounded-lg text-secondary">
                             <InputText label="Room Name" error={errors.name} placeholder="kamar" name="name" change={handleChange} value={typeData.name} />
                             <InputText label="Room Length" error={errors.length} placeholder="3.5" name="length" type="number" value={typeData.length} change={handleChange} />
