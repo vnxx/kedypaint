@@ -1,6 +1,7 @@
 import React from 'react'
 import Layout from "../layout"
 import { useSpring, animated, config } from 'react-spring'
+import { multiLang } from '../helper'
 
 export default function Dashboard({ data, setBar, setDataEdit }) {
     const animate = useSpring({
@@ -41,7 +42,7 @@ export default function Dashboard({ data, setBar, setDataEdit }) {
                 </div>
             </Layout>
             <div className="w-full flex justify-center">
-                <animated.div onClick={() => setBar('new')} style={ButtonAnimate} className="bg-white cursor-pointer fixed bottom-0 mb-16 sm:mb-56 text-secondary text-sm px-10 font-bold rounded-full shadow-main py-3">Add New One</animated.div>
+                <animated.div onClick={() => setBar('new')} style={ButtonAnimate} className="bg-white cursor-pointer fixed bottom-0 mb-16 sm:mb-56 text-secondary text-sm px-10 font-bold rounded-full shadow-main py-3">{multiLang("Add New One")}</animated.div>
             </div>
         </React.Fragment>
     )

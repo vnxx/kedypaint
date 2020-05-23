@@ -40,3 +40,31 @@ export function paint_calculate(val) {
         paintneeds: total.toFixed(1)
     }
 }
+
+export function multiLang(word) {
+    const lang = window.navigator.language.slice(0, 2);
+    if (lang === "id") {
+        switch (word) {
+            case 'Room Name':
+                return 'Nama Ruangan'
+            case 'Room Length':
+                return 'Panjang Ruangan'
+            case 'Room Width':
+                return 'Lebar Ruangan'
+            case 'Room Height':
+                return 'Tinggi Ruangan'
+            case 'Calculate':
+                return 'Hitung'
+            case 'Add New One':
+                return 'Tambah Baru'
+            case 'Update':
+                return 'Ubah'
+            case 'Delete':
+                return 'Hapus'
+            default:
+                return 'undifined'
+        }
+    } else {
+        return word;
+    }
+}
