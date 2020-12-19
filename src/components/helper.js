@@ -7,7 +7,7 @@ export function paint_calculate(val) {
     // Tinggi x Lebar x Jumlah dinding | contoh Dinding: 4m x 5m x 4 dinding = 80m2
 
     const wall_num = 4
-    const wall_calc = val.length * val.width * wall_num
+    const wall_calc = val.height * val.width * wall_num
     // console.log('wall calc: ' + wall_calc)
 
     // Hitung luas bidang permukaan plafon.
